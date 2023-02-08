@@ -1,25 +1,31 @@
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import DisplayNavbar from './DisplayNavbar';
+import DisplayForm from './DisplayForm';
+import DisplayCard from './DisplayCard';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    userData: []
+  }
+
+  addUserInfo = (props) => {
+    let userData = [...this.state.userData, props];
+
+    this.setState({
+      userData
+    })
+  }
+
+  render() {
+    return (
+      <div>
+        <DisplayNavbar/>
+        <DisplayForm addUserInfo={this.addUserInfo}/>
+        <DisplayCard userInfo={this.state.userData}/>
+      </div>
+    );
+  }
 }
 
 export default App;
